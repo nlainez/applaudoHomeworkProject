@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.applaudo.nflexperience.android.dummy.DummyContent;
 import com.applaudo.nflexperience.android.model.Venue;
+import com.applaudo.nflexperience.android.rest.ApiClient;
 import com.applaudo.nflexperience.android.rest.PhunwareNflApi;
 
 import java.util.List;
@@ -25,8 +26,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class VenueListFragment extends Fragment {
-
-    private final static String API_URL = "https://s3.amazonaws.com/jon-hancock-phunware";
 
     private RecyclerView mRecyclerView;
     private VenueRecycleAdapter mVenueRecycleAdapter;
@@ -71,11 +70,6 @@ public class VenueListFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(API_URL)
-                .build();
-
-        PhunwareNflApi methods = restAdapter.create(PhunwareNflApi.class);
         Callback<List<Venue>> callback = new Callback<List<Venue>>() {
             @Override
             public void success(List<Venue> o, Response response) {
@@ -88,11 +82,8 @@ public class VenueListFragment extends Fragment {
                 //Log.v("myApp", retrofitError.getMessage());
             }
         };
-        methods.getVenues(callback);
 
-        // TODO: Change Adapter to display your content
-       /* setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));*/
+        ApiClient.getInstance().getVenues(callback);
 
     }
 
@@ -123,17 +114,7 @@ public class VenueListFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-      //  mListener = null;
         mVenueRecycleAdapter.setOnVenueSelectedListener(null);
     }
-
-   // @Override
-   // public void onListItemClick(ListView l, View v, int position, long id) {
-   //     super.onListItemClick(l, v, position, id);
-
-   //    if (null != mListener) {
-   //         mListener.onVenueSelected(/*DummyContent.ITEMS.get(position).id*/position);
-    //    }
-   // }
 
 }
