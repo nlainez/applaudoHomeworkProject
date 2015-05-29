@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.applaudo.nflexperience.android.dummy.DummyContent;
+import com.applaudo.nflexperience.android.model.Venue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,10 +18,10 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
 
     private static final int STARTING_VENUES = 5;
     private OnVenueSelectedListener mListener;
-    List<DummyContent.DummyItem> venueDataSet;
+    List<Venue> venueDataSet;
 
     public VenueRecycleAdapter() {
-        venueDataSet = DummyContent.ITEMS;
+        venueDataSet = new ArrayList<Venue>();
     }
 
     public void setOnVenueSelectedListener(OnVenueSelectedListener listener) {
@@ -35,8 +37,8 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
 
     @Override
     public void onBindViewHolder(VenueViewHolder holder, final int position) {
-        DummyContent.DummyItem di = venueDataSet.get(position);
-        holder.textView.setText(di.content);
+        Venue venue = venueDataSet.get(position);
+        holder.textView.setText(venue.getName());
         holder.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
