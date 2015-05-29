@@ -2,21 +2,22 @@ package com.applaudo.nflexperience.android;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.applaudo.nflexperience.android.dummy.DummyContent;
 
-public class VenueListFragment extends ListFragment {
+public class VenueListFragment extends Fragment {
 
-    private OnVenueSelectedListener mListener;
-
-    public interface OnVenueSelectedListener {
-        public void onVenueSelected(int position);
-    }
-
+    private RecyclerView mRecyclerView;
+    private VenueRecycleAdapter mVenueRecycleAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,16 +60,29 @@ public class VenueListFragment extends ListFragment {
         }
 
         // TODO: Change Adapter to display your content
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));
+       /* setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));*/
+
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_venue_list, container, false);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.venue_list_recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mVenueRecycleAdapter);
+        return rootView;
+    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnVenueSelectedListener) activity;
+            mVenueRecycleAdapter = new VenueRecycleAdapter();
+            mVenueRecycleAdapter.setOnVenueSelectedListener((VenueRecycleAdapter.OnVenueSelectedListener) activity);
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnVenueSelectedListener");
@@ -78,16 +92,17 @@ public class VenueListFragment extends ListFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+      //  mListener = null;
+        mVenueRecycleAdapter.setOnVenueSelectedListener(null);
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+   // @Override
+   // public void onListItemClick(ListView l, View v, int position, long id) {
+   //     super.onListItemClick(l, v, position, id);
 
-       if (null != mListener) {
-            mListener.onVenueSelected(/*DummyContent.ITEMS.get(position).id*/position);
-        }
-    }
+   //    if (null != mListener) {
+   //         mListener.onVenueSelected(/*DummyContent.ITEMS.get(position).id*/position);
+    //    }
+   // }
 
 }
