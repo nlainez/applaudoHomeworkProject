@@ -16,6 +16,7 @@ public class Venue {
     private String mName;
     @SerializedName("address")
 	private String mAddress;
+    @SerializedName("city")
 	private String mCity;
 	private String mState;
 	private String mZip;
@@ -26,6 +27,7 @@ public class Venue {
 	private String mUrl;
 	private String mDescription;
 	private String mTicketLink;
+    @SerializedName("image_url")
 	private String mImageUrl;
 	private List<ScheduleItem> mSchedule;
 

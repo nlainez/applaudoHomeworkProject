@@ -1,5 +1,6 @@
 package com.applaudo.nflexperience.android;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.applaudo.nflexperience.android.dummy.DummyContent;
 import com.applaudo.nflexperience.android.model.Venue;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,20 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
     @Override
     public void onBindViewHolder(VenueViewHolder holder, final int position) {
         Venue venue = venueDataSet.get(position);
-        holder.textView.setText(venue.getName());
+        holder.textViewName.setText(venue.getName());
+        holder.textViewAddress.setText(venue.getAddress());
+        holder.textViewCity.setText(venue.getCity());
+        Context context = holder.imageView.getContext();
+        if(null != venue.getImageUrl()  && !"".equals(venue.getImageUrl()))
+        Picasso.with(context)
+                .load(venue.getImageUrl())
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .resize(96, 96)
+                .centerCrop()
+                .into(holder.imageView);
+
+
         holder.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
