@@ -69,8 +69,8 @@ public class VenueDetailFragment extends Fragment {
     }
 
     public void updateVenueView(int position) {
-        TextView textView = (TextView) getActivity().findViewById(R.id.texto);
-        textView.setText("Dummy");
+        /*TextView textView = (TextView) getActivity().findViewById(R.id.texto);
+        textView.setText("Dummy");*/
         mCurrentPosition = position;
     }
 

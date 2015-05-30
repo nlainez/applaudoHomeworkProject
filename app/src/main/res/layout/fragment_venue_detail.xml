@@ -1,10 +1,111 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="com.applaudo.nflexperience.android.VenueDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:id="@+id/texto"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardImageView"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cardTextViewName"
+                    android:text="Venue Name"
+                    android:textStyle="bold"
+                    android:paddingTop="24dp"
+                    android:textSize="24sp"
+                    android:textColor="@color/nfl_blue_1"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cardTextViewAddress"
+                    android:text="Venue Address"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/nfl_black_2"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cardTextViewCity"
+                    android:text="Venue City, Venue State Venue zip"
+                    android:textStyle="bold"
+                    android:paddingBottom="16dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/nfl_black_2"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cardMapsButton"
+                        android:text="Go"
+                        android:drawableTop="@android:drawable/ic_dialog_map"
+                        android:layout_gravity="right"
+                        android:padding="8dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cardShareButton"
+                        android:text="Share"
+                        android:drawableTop="@android:drawable/ic_menu_share"
+                        android:layout_gravity="right"
+                        android:padding="8dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cardBuyTicketButton"
+                        android:text="Buy"
+                        android:drawableTop="@android:drawable/ic_menu_send"
+                        android:layout_gravity="right"
+                        android:padding="8dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cardCalendarButton"
+                        android:text="Add"
+                        android:drawableTop="@android:drawable/ic_menu_my_calendar"
+                        android:layout_gravity="right"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
