@@ -39,25 +39,25 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
 
     @Override
     public void onBindViewHolder(VenueViewHolder holder, final int position) {
-        Venue venue = venueDataSet.get(position);
+        final Venue venue = venueDataSet.get(position);
         holder.textViewName.setText(venue.getName());
         holder.textViewAddress.setText(venue.getAddress());
         holder.textViewCity.setText(venue.getCity());
-        Context context = holder.imageView.getContext();
-        if(null != venue.getImageUrl()  && !"".equals(venue.getImageUrl()))
-        Picasso.with(context)
-                .load(venue.getImageUrl())
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
-                .resize(96, 96)
-                .centerCrop()
-                .into(holder.imageView);
-
+        if(null != venue.getImageUrl()  && !"".equals(venue.getImageUrl())) {
+            Context context = holder.imageView.getContext();
+            Picasso.with(context)
+                    .load(venue.getImageUrl())
+                    .placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher)
+                    .resize(96, 96)
+                    .centerCrop()
+                    .into(holder.imageView);
+        }
 
         holder.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                mListener.onVenueSelected(position);
+                mListener.onVenueSelected(venue);
             }
         });
     }
@@ -68,6 +68,6 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
     }
 
     public interface OnVenueSelectedListener {
-        public void onVenueSelected(int position);
+        public void onVenueSelected(Venue venue);
     }
 }

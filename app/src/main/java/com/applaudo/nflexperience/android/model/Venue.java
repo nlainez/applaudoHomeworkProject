@@ -2,9 +2,10 @@ package com.applaudo.nflexperience.android.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Venue {
+public class Venue implements Serializable{
 
 	// Core fields
 	@SerializedName("id")
@@ -18,7 +19,9 @@ public class Venue {
 	private String mAddress;
     @SerializedName("city")
 	private String mCity;
+    @SerializedName("state")
 	private String mState;
+    @SerializedName("zip")
 	private String mZip;
 	private String mPhone;
 
@@ -186,5 +189,9 @@ public class Venue {
 	public void setImageUrl(String imageUrl) {
 		mImageUrl = imageUrl;
 	}
+
+	public String getCityStateZip() {
+        return getCity() + ", " + getState() + " " +getZip();
+    }
 
 }

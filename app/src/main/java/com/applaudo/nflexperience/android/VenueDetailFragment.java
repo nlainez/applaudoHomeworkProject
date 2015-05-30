@@ -1,12 +1,18 @@
 package com.applaudo.nflexperience.android;
 
 
+import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.applaudo.nflexperience.android.model.Venue;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -16,13 +22,15 @@ import android.widget.TextView;
  */
 public class VenueDetailFragment extends Fragment {
 
-    final static String ARG_POSITION = "position";
-    private int mCurrentPosition = -1;
+    final static String ARG_VENUE = "venue";
+    final static String SER_KEY = "com.applaudo.nflexperience.android.model";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private Venue mVenue;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -62,16 +70,31 @@ public class VenueDetailFragment extends Fragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            updateVenueView(args.getInt(ARG_POSITION));
-        } else if (mCurrentPosition != -1) {
-            updateVenueView(mCurrentPosition);
+            updateVenueView((Venue) args.getSerializable(SER_KEY));
+        } else if (mVenue != null) {
+            updateVenueView(mVenue);
         }
     }
 
-    public void updateVenueView(int position) {
-        /*TextView textView = (TextView) getActivity().findViewById(R.id.texto);
-        textView.setText("Dummy");*/
-        mCurrentPosition = position;
+    public void updateVenueView(Venue venue) {
+        TextView textView = (TextView) getActivity().findViewById(R.id.cardTextViewName);
+        textView.setText(venue.getName());
+        textView = (TextView) getActivity().findViewById(R.id.cardTextViewAddress);
+        textView.setText(venue.getAddress());
+        textView = (TextView) getActivity().findViewById(R.id.cardTextViewCity);
+        textView.setText(venue.getCityStateZip());
+        if(null != venue.getImageUrl()  && !"".equals(venue.getImageUrl())) {
+            ImageView imageView = (ImageView) getActivity().findViewById(R.id.cardImageView);
+            Context context = getActivity().getBaseContext();
+            Picasso.with(context)
+                    .load(venue.getImageUrl())
+                    .placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher)
+                   // .resize(96, 96)
+                  //  .centerCrop()
+                    .into(imageView);
+        }
+        mVenue = venue;
     }
 
     @Override
@@ -88,7 +111,7 @@ public class VenueDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         if (savedInstanceState != null) {
-            mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
+            mVenue = (Venue) savedInstanceState.getSerializable(SER_KEY);
         }
 
         return inflater.inflate(R.layout.fragment_venue_detail, container, false);
@@ -97,6 +120,6 @@ public class VenueDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(ARG_POSITION, mCurrentPosition);
+        outState.putSerializable(SER_KEY,mVenue);
     }
 }

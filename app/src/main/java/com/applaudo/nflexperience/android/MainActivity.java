@@ -64,22 +64,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onVenueSelected(int position) {
+    public void onVenueSelected(Venue venue) {
 
         VenueDetailFragment articleFrag = (VenueDetailFragment)
                 getSupportFragmentManager().findFragmentById(R.id.venueDetail_fragment);
 
         if (articleFrag != null) {
 
-            articleFrag.updateVenueView(position);
+            articleFrag.updateVenueView(venue);
 
         } else {
+
             VenueDetailFragment newFragment = VenueDetailFragment.newInstance();
             Bundle args = new Bundle();
-            args.putInt(VenueDetailFragment.ARG_POSITION, position);
+            args.putSerializable(VenueDetailFragment.SER_KEY, venue);
             newFragment.setArguments(args);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
             transaction.replace(R.id.fragment_container, newFragment);
             transaction.addToBackStack(null);
 
