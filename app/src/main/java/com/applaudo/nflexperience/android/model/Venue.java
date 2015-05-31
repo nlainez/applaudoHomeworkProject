@@ -31,6 +31,7 @@ public class Venue implements Serializable{
 	private String mTollFreePhone;
 	private String mUrl;
 	private String mDescription;
+	@SerializedName("ticket_link")
 	private String mTicketLink;
     @SerializedName("image_url")
 	private String mImageUrl;

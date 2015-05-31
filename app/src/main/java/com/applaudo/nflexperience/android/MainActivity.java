@@ -1,5 +1,6 @@
 package com.applaudo.nflexperience.android;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.applaudo.nflexperience.android.model.Venue;
 import com.applaudo.nflexperience.android.rest.PhunwareNflApi;
@@ -23,7 +25,8 @@ import retrofit.client.Response;
 public class MainActivity extends AppCompatActivity
         implements VenueRecycleAdapter.OnVenueSelectedListener,
                     VenueDetailFragment.OnShareButtonClickedListener,
-                    VenueDetailFragment.OnMapButtonClickedListener{
+                    VenueDetailFragment.OnMapButtonClickedListener,
+                    VenueDetailFragment.OnBuyButtonClickedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,23 @@ public class MainActivity extends AppCompatActivity
         mapIntent.setPackage("com.google.android.apps.maps");
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(mapIntent);
+        }
+    }
+
+    @Override
+    public void onBuyButtonClicked(Venue venue) {
+        if(null != venue.getTicketLink() && "" != venue.getTicketLink()) {
+            Uri ticketLink = Uri.parse(venue.getTicketLink());
+            Intent intent = new Intent(Intent.ACTION_VIEW, ticketLink);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }else{
+            Context context = getApplicationContext();
+            CharSequence text = "No ticket link available";
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
     }
 }

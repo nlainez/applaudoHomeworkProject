@@ -31,6 +31,7 @@ public class VenueDetailFragment extends Fragment{
 
     private OnShareButtonClickedListener mShareListener;
     private OnMapButtonClickedListener mMapListener;
+    private OnBuyButtonClickedListener mBuyListener;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -133,6 +134,20 @@ public class VenueDetailFragment extends Fragment{
             throw new ClassCastException(activity.toString()
                     + " must implement OnMapButtonClickedListener");
         }
+        try {
+            mBuyListener = (OnBuyButtonClickedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnBuyButtonClickedListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mShareListener = null;
+        mMapListener = null;
+        mBuyListener = null;
     }
 
     @Override
@@ -170,6 +185,14 @@ public class VenueDetailFragment extends Fragment{
             }
         });
 
+        button = (Button) view.findViewById(R.id.cardBuyTicketButton);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mBuyListener.onBuyButtonClicked(mVenue);
+            }
+        });
+
         return view;
     }
 
@@ -185,6 +208,10 @@ public class VenueDetailFragment extends Fragment{
 
     public interface OnMapButtonClickedListener {
         void onMapButtonClicked(Venue venue);
+    }
+
+    public interface OnBuyButtonClickedListener {
+        void onBuyButtonClicked(Venue venue);
     }
 
 
