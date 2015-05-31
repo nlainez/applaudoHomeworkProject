@@ -1,11 +1,13 @@
 package com.applaudo.nflexperience.android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.applaudo.nflexperience.android.model.Venue;
 import com.applaudo.nflexperience.android.rest.PhunwareNflApi;
@@ -18,7 +20,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity
-        implements VenueRecycleAdapter.OnVenueSelectedListener{
+        implements VenueRecycleAdapter.OnVenueSelectedListener,
+                    VenueDetailFragment.onShareButtonClickedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,4 +89,15 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
         }
     }
+
+    public void onShareButtonClicked(Venue venue) {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareText = "Join me at " + venue.getName() + "! Best venue in sports ever!"
+                +" Just drive to " + venue.getAddress();
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Looking for the best venue in sports?");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
 }

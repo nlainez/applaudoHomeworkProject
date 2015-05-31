@@ -1,12 +1,15 @@
 package com.applaudo.nflexperience.android;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,10 +24,12 @@ import com.squareup.picasso.Picasso;
  * Use the {@link VenueDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class VenueDetailFragment extends Fragment {
+public class VenueDetailFragment extends Fragment{
 
     final static String ARG_VENUE = "venue";
     final static String SER_KEY = "com.applaudo.nflexperience.android.model";
+
+    private onShareButtonClickedListener mListener;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -113,6 +118,17 @@ public class VenueDetailFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (onShareButtonClickedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnVenueSelectedListener");
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -129,12 +145,26 @@ public class VenueDetailFragment extends Fragment {
             mVenue = (Venue) savedInstanceState.getSerializable(SER_KEY);
         }
 
-        return inflater.inflate(R.layout.fragment_venue_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_venue_detail, container, false);
+
+        Button button = (Button) view.findViewById(R.id.cardShareButton);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mListener.onShareButtonClicked(mVenue);
+            }
+        });
+
+        return view;
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(SER_KEY,mVenue);
+        outState.putSerializable(SER_KEY, mVenue);
+    }
+
+    public interface onShareButtonClickedListener {
+        void onShareButtonClicked(Venue venue);
     }
 }
