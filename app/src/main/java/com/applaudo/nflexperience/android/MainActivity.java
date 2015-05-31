@@ -6,27 +6,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.applaudo.nflexperience.android.model.Venue;
-import com.applaudo.nflexperience.android.rest.PhunwareNflApi;
-
-import java.util.List;
-
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity
         implements VenueRecycleAdapter.OnVenueSelectedListener,
                     VenueDetailFragment.OnShareButtonClickedListener,
                     VenueDetailFragment.OnMapButtonClickedListener,
                     VenueDetailFragment.OnBuyButtonClickedListener{
+
+    private static final String BACKSTACK_NAME= "venueDetailFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +40,12 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -66,6 +57,12 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (item.getItemId() == android.R.id.home) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
+            this.onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
@@ -89,9 +86,9 @@ public class MainActivity extends AppCompatActivity
             newFragment.setArguments(args);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, newFragment);
-            transaction.addToBackStack(null);
-
+            transaction.addToBackStack(BACKSTACK_NAME);
             transaction.commit();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
