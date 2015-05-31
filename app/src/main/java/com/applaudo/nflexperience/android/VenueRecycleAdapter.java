@@ -42,7 +42,7 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
         final Venue venue = venueDataSet.get(position);
         holder.textViewName.setText(venue.getName());
         holder.textViewAddress.setText(venue.getAddress());
-        holder.textViewCity.setText(venue.getCity());
+        holder.textViewCity.setText(venue.getCityStateZip());
         if(null != venue.getImageUrl()  && !"".equals(venue.getImageUrl())) {
             Context context = holder.imageView.getContext();
             Picasso.with(context)
