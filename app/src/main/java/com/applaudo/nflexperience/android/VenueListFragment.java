@@ -41,7 +41,7 @@ public class VenueListFragment extends Fragment {
         Callback<List<Venue>> callback = new Callback<List<Venue>>() {
             @Override
             public void success(List<Venue> o, Response response) {
-                mVenueRecycleAdapter.venueDataSet.addAll(o);
+                mVenueRecycleAdapter.getVenueDataSet().addAll(o);
                 mVenueRecycleAdapter.notifyDataSetChanged();
             }
 

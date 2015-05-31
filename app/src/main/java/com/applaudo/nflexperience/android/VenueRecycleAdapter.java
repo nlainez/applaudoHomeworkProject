@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.applaudo.nflexperience.android.dummy.DummyContent;
 import com.applaudo.nflexperience.android.model.Venue;
 import com.applaudo.nflexperience.android.util.ImageUtil;
 import com.squareup.picasso.Picasso;
@@ -19,16 +18,19 @@ import java.util.List;
  */
 public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
 
-    private static final int STARTING_VENUES = 5;
     private OnVenueSelectedListener mListener;
-    List<Venue> venueDataSet;
+    private List<Venue> venueDataSet;
 
     public VenueRecycleAdapter() {
-        venueDataSet = new ArrayList<Venue>();
+        venueDataSet = new ArrayList<>();
     }
 
     public void setOnVenueSelectedListener(OnVenueSelectedListener listener) {
         mListener = listener;
+    }
+
+    public List<Venue> getVenueDataSet() {
+        return this.venueDataSet;
     }
 
     @Override
@@ -56,6 +58,8 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
                     .resize(px, px)
                     .centerCrop()
                     .into(holder.imageView);
+        }else{
+            holder.imageView.setImageResource(R.mipmap.ic_launcher);
         }
 
         holder.setOnClickListener(new View.OnClickListener(){
@@ -72,6 +76,6 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
     }
 
     public interface OnVenueSelectedListener {
-        public void onVenueSelected(Venue venue);
+        void onVenueSelected(Venue venue);
     }
 }
