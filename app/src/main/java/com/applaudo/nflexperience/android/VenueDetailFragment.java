@@ -2,15 +2,24 @@ package com.applaudo.nflexperience.android;
 
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.applaudo.nflexperience.android.model.ScheduleItem;
 import com.applaudo.nflexperience.android.model.Venue;
 import com.squareup.picasso.Picasso;
 
@@ -94,6 +103,23 @@ public class VenueDetailFragment extends Fragment {
                   //  .centerCrop()
                     .into(imageView);
         }
+
+        LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.venueDetailLinearLayout);
+
+
+        if(!venue.getSchedule().isEmpty()) {
+
+            StringBuilder sb = new StringBuilder();
+
+            for (ScheduleItem scheduleItem : venue.getSchedule()) {
+                sb.append(scheduleItem.getDecoratedDate()).append(System.getProperty("line.separator"));
+            }
+
+            textView = (TextView) getActivity().findViewById(R.id.cardTextViewSchedule);
+            textView.setText(sb.toString());
+
+        }
+
         mVenue = venue;
     }
 

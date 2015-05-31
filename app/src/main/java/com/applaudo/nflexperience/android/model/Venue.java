@@ -32,6 +32,7 @@ public class Venue implements Serializable{
 	private String mTicketLink;
     @SerializedName("image_url")
 	private String mImageUrl;
+    @SerializedName("schedule")
 	private List<ScheduleItem> mSchedule;
 
 	// computed fields

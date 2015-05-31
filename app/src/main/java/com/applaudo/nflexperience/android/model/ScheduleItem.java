@@ -1,14 +1,25 @@
 package com.applaudo.nflexperience.android.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
-public class ScheduleItem {
-	private static final SimpleDateFormat FORMATTER = new SimpleDateFormat(
-			"yyyy-MM-dd HH:mm:ss Z");
+public class ScheduleItem implements Serializable{
 
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss Z";
+    private static final String HR_DATE_FORMAT = "EEE MM/dd KK:mm a";
+    private static final String HOURS_MINUTES_FORMAT = "KK:mm a";
+	private static final SimpleDateFormat FORMATTER = new SimpleDateFormat(DATE_FORMAT);
+
+	@SerializedName("start_date")
 	private Date mStartDate;
+    @SerializedName("end_date")
 	private Date mEndDate;
 
 	public ScheduleItem() {
@@ -56,6 +67,12 @@ public class ScheduleItem {
 	public String getEndDateString() {
 		return FORMATTER.format(mEndDate);
 	}
+
+    public String getDecoratedDate(){
+        SimpleDateFormat startDateFormat = new SimpleDateFormat(HR_DATE_FORMAT);
+        SimpleDateFormat endDateFormat = new SimpleDateFormat(HOURS_MINUTES_FORMAT);
+        return startDateFormat.format(getStartDate()) + " to " + endDateFormat.format(getEndDate());
+    }
 
 	@Override
 	public boolean equals(Object o) {
