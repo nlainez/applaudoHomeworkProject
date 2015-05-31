@@ -3,56 +3,25 @@ package com.applaudo.nflexperience.android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import com.applaudo.nflexperience.android.dummy.DummyContent;
 import com.applaudo.nflexperience.android.model.Venue;
 import com.applaudo.nflexperience.android.rest.ApiClient;
-import com.applaudo.nflexperience.android.rest.PhunwareNflApi;
 
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class VenueListFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
     private VenueRecycleAdapter mVenueRecycleAdapter;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    // TODO: Rename and change types of parameters
-    public static VenueListFragment newInstance(String param1, String param2) {
-        VenueListFragment fragment = new VenueListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public static VenueListFragment newInstance() {
-        VenueListFragment fragment = new VenueListFragment();
-        return fragment;
-    }
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -61,14 +30,13 @@ public class VenueListFragment extends Fragment {
     public VenueListFragment() {
     }
 
+    public static VenueListFragment newInstance() {
+        return new VenueListFragment();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
         Callback<List<Venue>> callback = new Callback<List<Venue>>() {
             @Override
@@ -91,11 +59,11 @@ public class VenueListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_venue_list, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.venue_list_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.venue_list_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(mVenueRecycleAdapter);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(mVenueRecycleAdapter);
         return rootView;
     }
 
