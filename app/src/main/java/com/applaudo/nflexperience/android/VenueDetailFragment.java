@@ -2,21 +2,13 @@ package com.applaudo.nflexperience.android;
 
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.applaudo.nflexperience.android.model.ScheduleItem;
@@ -97,22 +89,19 @@ public class VenueDetailFragment extends Fragment {
             Context context = getActivity().getBaseContext();
             Picasso.with(context)
                     .load(venue.getImageUrl())
-                    .placeholder(R.mipmap.ic_launcher)
-                    .error(R.mipmap.ic_launcher)
-                   // .resize(96, 96)
-                  //  .centerCrop()
+                    .placeholder(R.drawable.venue_placeholder_img)
+                    .error(R.drawable.venue_error_img)
                     .into(imageView);
         }
-
-        LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.venueDetailLinearLayout);
-
 
         if(!venue.getSchedule().isEmpty()) {
 
             StringBuilder sb = new StringBuilder();
 
             for (ScheduleItem scheduleItem : venue.getSchedule()) {
-                sb.append(scheduleItem.getDecoratedDate()).append(System.getProperty("line.separator"));
+                sb.append(scheduleItem.getDecoratedDate())
+                        .append(System.getProperty("line.separator"))
+                        .append(System.getProperty("line.separator"));
             }
 
             textView = (TextView) getActivity().findViewById(R.id.cardTextViewSchedule);
