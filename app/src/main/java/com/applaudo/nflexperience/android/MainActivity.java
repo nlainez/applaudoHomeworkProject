@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity
         if (findViewById(R.id.fragment_container) != null) {
 
             if (savedInstanceState != null) {
+                //If theres more than one fragment in the backstack we must turn on the
+                //home button to provide ancestral navigation, only if we are returning
+                //from orientation change
+                if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                }
                 return;
             }
 
@@ -61,7 +67,6 @@ public class MainActivity extends AppCompatActivity
 
         if (item.getItemId() == android.R.id.home) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setHomeButtonEnabled(false);
             this.onBackPressed();
         }
 
