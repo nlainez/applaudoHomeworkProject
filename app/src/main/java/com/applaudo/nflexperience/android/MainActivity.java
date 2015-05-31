@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBuyButtonClicked(Venue venue) {
-        if(null != venue.getTicketLink() && "" != venue.getTicketLink()) {
+        if(null != venue.getTicketLink() &&  !"".equals(venue.getTicketLink())) {
             Uri ticketLink = Uri.parse(venue.getTicketLink());
             Intent intent = new Intent(Intent.ACTION_VIEW, ticketLink);
             if (intent.resolveActivity(getPackageManager()) != null) {
