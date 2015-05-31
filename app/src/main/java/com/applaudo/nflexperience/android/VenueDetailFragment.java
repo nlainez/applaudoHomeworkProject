@@ -91,14 +91,17 @@ public class VenueDetailFragment extends Fragment{
         textView.setText(venue.getAddress());
         textView = (TextView) getActivity().findViewById(R.id.cardTextViewCity);
         textView.setText(venue.getCityStateZip());
+        ImageView imageView = (ImageView) getActivity().findViewById(R.id.cardImageView);
         if(null != venue.getImageUrl()  && !"".equals(venue.getImageUrl())) {
-            ImageView imageView = (ImageView) getActivity().findViewById(R.id.cardImageView);
+
             Context context = getActivity().getBaseContext();
             Picasso.with(context)
                     .load(venue.getImageUrl())
                     .placeholder(R.drawable.venue_placeholder_img)
                     .error(R.drawable.venue_error_img)
                     .into(imageView);
+        }else{
+            imageView.setImageResource(R.drawable.venue_error_img);
         }
 
         if(!venue.getSchedule().isEmpty()) {
