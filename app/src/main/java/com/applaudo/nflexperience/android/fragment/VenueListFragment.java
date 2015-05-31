@@ -1,4 +1,4 @@
-package com.applaudo.nflexperience.android;
+package com.applaudo.nflexperience.android.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.applaudo.nflexperience.android.R;
+import com.applaudo.nflexperience.android.adapter.VenueRecycleAdapter;
 import com.applaudo.nflexperience.android.model.Venue;
 import com.applaudo.nflexperience.android.rest.ApiClient;
 

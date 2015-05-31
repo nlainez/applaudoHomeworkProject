@@ -1,9 +1,8 @@
-package com.applaudo.nflexperience.android;
+package com.applaudo.nflexperience.android.fragment;
 
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.applaudo.nflexperience.android.R;
 import com.applaudo.nflexperience.android.model.ScheduleItem;
 import com.applaudo.nflexperience.android.model.Venue;
 import com.squareup.picasso.Picasso;
@@ -26,8 +25,8 @@ import com.squareup.picasso.Picasso;
  */
 public class VenueDetailFragment extends Fragment{
 
-    final static String ARG_VENUE = "venue";
-    final static String SER_KEY = "com.applaudo.nflexperience.android.model";
+    public final static String ARG_VENUE = "venue";
+    public final static String SER_KEY = "com.applaudo.nflexperience.android.model";
 
     private OnShareButtonClickedListener mShareListener;
     private OnMapButtonClickedListener mMapListener;

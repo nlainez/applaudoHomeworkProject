@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.applaudo.nflexperience.android.adapter.VenueRecycleAdapter;
+import com.applaudo.nflexperience.android.fragment.VenueDetailFragment;
+import com.applaudo.nflexperience.android.fragment.VenueListFragment;
 import com.applaudo.nflexperience.android.model.Venue;
 
 public class MainActivity extends AppCompatActivity

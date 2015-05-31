@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment android:name="com.applaudo.nflexperience.android.VenueListFragment"
+    <fragment android:name="com.applaudo.nflexperience.android.fragment.VenueListFragment"
         android:id="@+id/venueList_fragment"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
 
-    <fragment android:name="com.applaudo.nflexperience.android.VenueDetailFragment"
+    <fragment android:name="com.applaudo.nflexperience.android.fragment.VenueDetailFragment"
         android:id="@+id/venueDetail_fragment"
         android:layout_weight="2"
         android:layout_width="0dp"

@@ -1,4 +1,4 @@
-package com.applaudo.nflexperience.android;
+package com.applaudo.nflexperience.android.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.applaudo.nflexperience.android.R;
 import com.applaudo.nflexperience.android.model.Venue;
 import com.applaudo.nflexperience.android.util.ImageUtil;
 import com.squareup.picasso.Picasso;
