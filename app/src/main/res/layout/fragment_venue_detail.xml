@@ -82,7 +82,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/cardMapsButton"
-                            android:text="Go"
+                            android:text="Take me there"
                             android:padding="8dp" />
 
                         <Button

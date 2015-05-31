@@ -1,6 +1,7 @@
 package com.applaudo.nflexperience.android;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,8 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity
         implements VenueRecycleAdapter.OnVenueSelectedListener,
-                    VenueDetailFragment.onShareButtonClickedListener{
+                    VenueDetailFragment.OnShareButtonClickedListener,
+                    VenueDetailFragment.OnMapButtonClickedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,4 +102,17 @@ public class MainActivity extends AppCompatActivity
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 
+
+    @Override
+    public void onMapButtonClicked(Venue venue) {
+        Uri gmmIntentUri = Uri.parse("geo:"+venue.getLatitude()+","+venue.getLongitude())
+                .buildUpon()
+                .appendQueryParameter("q",venue.getAddress() + ", " + venue.getCityStateZip())
+                .build();
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
+    }
 }

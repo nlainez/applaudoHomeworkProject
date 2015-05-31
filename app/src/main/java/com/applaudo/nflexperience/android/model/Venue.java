@@ -11,8 +11,10 @@ public class Venue implements Serializable{
 	@SerializedName("id")
 	private long mId;
 	private int mPcode;
-	private int mLatitude;
-	private int mLongitude;
+	@SerializedName("latitude")
+	private float mLatitude;
+	@SerializedName("longitude")
+	private float mLongitude;
     @SerializedName("name")
     private String mName;
     @SerializedName("address")
@@ -138,19 +140,19 @@ public class Venue implements Serializable{
 		mPhone = phone;
 	}
 
-	public int getLatitude() {
+	public float getLatitude() {
 		return mLatitude;
 	}
 
-	public void setLatitude(int latitude) {
+	public void setLatitude(float latitude) {
 		mLatitude = latitude;
 	}
 
-	public int getLongitude() {
+	public float getLongitude() {
 		return mLongitude;
 	}
 
-	public void setLongitude(int longitude) {
+	public void setLongitude(float longitude) {
 		mLongitude = longitude;
 	}
 

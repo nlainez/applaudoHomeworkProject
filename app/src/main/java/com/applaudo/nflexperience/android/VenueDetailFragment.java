@@ -29,7 +29,8 @@ public class VenueDetailFragment extends Fragment{
     final static String ARG_VENUE = "venue";
     final static String SER_KEY = "com.applaudo.nflexperience.android.model";
 
-    private onShareButtonClickedListener mListener;
+    private OnShareButtonClickedListener mShareListener;
+    private OnMapButtonClickedListener mMapListener;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -121,10 +122,16 @@ public class VenueDetailFragment extends Fragment{
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (onShareButtonClickedListener) activity;
+            mShareListener = (OnShareButtonClickedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnVenueSelectedListener");
+                    + " must implement OnShareButtonClickedListener");
+        }
+        try {
+            mMapListener = (OnMapButtonClickedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnMapButtonClickedListener");
         }
     }
 
@@ -151,7 +158,15 @@ public class VenueDetailFragment extends Fragment{
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                mListener.onShareButtonClicked(mVenue);
+                mShareListener.onShareButtonClicked(mVenue);
+            }
+        });
+
+        button = (Button) view.findViewById(R.id.cardMapsButton);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mMapListener.onMapButtonClicked(mVenue);
             }
         });
 
@@ -164,7 +179,13 @@ public class VenueDetailFragment extends Fragment{
         outState.putSerializable(SER_KEY, mVenue);
     }
 
-    public interface onShareButtonClickedListener {
+    public interface OnShareButtonClickedListener {
         void onShareButtonClicked(Venue venue);
     }
+
+    public interface OnMapButtonClickedListener {
+        void onMapButtonClicked(Venue venue);
+    }
+
+
 }
