@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.applaudo.nflexperience.android.dummy.DummyContent;
 import com.applaudo.nflexperience.android.model.Venue;
+import com.applaudo.nflexperience.android.util.ImageUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -45,11 +46,14 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
         holder.textViewCity.setText(venue.getCityStateZip());
         if(null != venue.getImageUrl()  && !"".equals(venue.getImageUrl())) {
             Context context = holder.imageView.getContext();
+
+            int px = ImageUtil.convertDpToPixel(40,context);
+
             Picasso.with(context)
                     .load(venue.getImageUrl())
                     .placeholder(R.mipmap.ic_launcher)
                     .error(R.mipmap.ic_launcher)
-                    .resize(96, 96)
+                    .resize(px, px)
                     .centerCrop()
                     .into(holder.imageView);
         }
