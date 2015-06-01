@@ -16,11 +16,11 @@ import com.applaudo.nflexperience.android.model.Venue;
 
 public class MainActivity extends AppCompatActivity
         implements VenueRecycleAdapter.OnVenueSelectedListener,
-                    VenueDetailFragment.OnShareButtonClickedListener,
-                    VenueDetailFragment.OnMapButtonClickedListener,
-                    VenueDetailFragment.OnBuyButtonClickedListener{
+        VenueDetailFragment.OnShareButtonClickedListener,
+        VenueDetailFragment.OnMapButtonClickedListener,
+        VenueDetailFragment.OnBuyButtonClickedListener {
 
-    private static final String BACKSTACK_NAME= "venueDetailFragment";
+    private static final String BACKSTACK_NAME = "venueDetailFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
                 //If theres more than one fragment in the backstack we must turn on the
                 //home button to provide ancestral navigation, only if we are returning
                 //from orientation change
-                if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 }
                 return;
@@ -45,6 +45,15 @@ public class MainActivity extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, venueListFragment).commit();
+        } else {
+
+            if (savedInstanceState == null) {
+                VenueDetailFragment detailFragment = (VenueDetailFragment)
+                        getSupportFragmentManager().findFragmentById(R.id.venueDetail_fragment);
+
+                getSupportFragmentManager().beginTransaction()
+                        .hide(detailFragment).commit();
+            }
         }
 
     }
@@ -84,6 +93,11 @@ public class MainActivity extends AppCompatActivity
 
         if (articleFrag != null) {
 
+            if (articleFrag.isHidden()) {
+                getSupportFragmentManager().beginTransaction()
+                        .show(articleFrag).commit();
+            }
+
             articleFrag.updateVenueView(venue);
 
         } else {
@@ -104,7 +118,7 @@ public class MainActivity extends AppCompatActivity
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         String shareText = "Join me at " + venue.getName() + "! Best venue in sports ever!"
-                +" Just drive to " + venue.getAddress();
+                + " Just drive to " + venue.getAddress();
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Looking for the best venue in sports?");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
@@ -113,9 +127,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onMapButtonClicked(Venue venue) {
-        Uri gmmIntentUri = Uri.parse("geo:"+venue.getLatitude()+","+venue.getLongitude())
+        Uri gmmIntentUri = Uri.parse("geo:" + venue.getLatitude() + "," + venue.getLongitude())
                 .buildUpon()
-                .appendQueryParameter("q",venue.getAddress() + ", " + venue.getCityStateZip())
+                .appendQueryParameter("q", venue.getAddress() + ", " + venue.getCityStateZip())
                 .build();
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
@@ -126,13 +140,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBuyButtonClicked(Venue venue) {
-        if(null != venue.getTicketLink() &&  !"".equals(venue.getTicketLink())) {
+        if (null != venue.getTicketLink() && !"".equals(venue.getTicketLink())) {
             Uri ticketLink = Uri.parse(venue.getTicketLink());
             Intent intent = new Intent(Intent.ACTION_VIEW, ticketLink);
             if (intent.resolveActivity(getPackageManager()) != null) {
                 startActivity(intent);
             }
-        }else{
+        } else {
             Context context = getApplicationContext();
             CharSequence text = "No ticket link available";
             int duration = Toast.LENGTH_LONG;
