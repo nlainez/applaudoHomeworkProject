@@ -10,7 +10,7 @@ import com.applaudo.nflexperience.android.R;
 /**
  * Created by Carlos on 28/05/2015.
  */
-public class VenueViewHolder extends RecyclerView.ViewHolder{
+public class VenueViewHolder extends RecyclerView.ViewHolder {
 
     private final View mParent;
     protected TextView textViewName;

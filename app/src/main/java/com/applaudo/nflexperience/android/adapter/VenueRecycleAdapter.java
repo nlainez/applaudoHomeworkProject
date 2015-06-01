@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by Carlos on 28/05/2015.
  */
-public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
+public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder> {
 
     private OnVenueSelectedListener mListener;
     private List<Venue> venueDataSet;
@@ -47,10 +47,10 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
         holder.textViewName.setText(venue.getName());
         holder.textViewAddress.setText(venue.getAddress());
         holder.textViewCity.setText(venue.getCityStateZip());
-        if(null != venue.getImageUrl()  && !"".equals(venue.getImageUrl())) {
+        if (null != venue.getImageUrl() && !"".equals(venue.getImageUrl())) {
             Context context = holder.imageView.getContext();
 
-            int px = ImageUtil.convertDpToPixel(40,context);
+            int px = ImageUtil.convertDpToPixel(40, context);
 
             Picasso.with(context)
                     .load(venue.getImageUrl())
@@ -59,11 +59,11 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder>{
                     .resize(px, px)
                     .centerCrop()
                     .into(holder.imageView);
-        }else{
+        } else {
             holder.imageView.setImageResource(R.mipmap.ic_launcher);
         }
 
-        holder.setOnClickListener(new View.OnClickListener(){
+        holder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onVenueSelected(venue);

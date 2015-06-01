@@ -17,7 +17,7 @@ import com.applaudo.nflexperience.android.model.ScheduleItem;
 import com.applaudo.nflexperience.android.model.Venue;
 import com.squareup.picasso.Picasso;
 
-public class VenueDetailFragment extends Fragment{
+public class VenueDetailFragment extends Fragment {
 
     public final static String SER_KEY = "com.applaudo.nflexperience.android.model";
 
@@ -28,7 +28,7 @@ public class VenueDetailFragment extends Fragment{
     private Venue mVenue;
 
     public static VenueDetailFragment newInstance() {
-        return  new VenueDetailFragment();
+        return new VenueDetailFragment();
     }
 
     public VenueDetailFragment() {
@@ -55,7 +55,7 @@ public class VenueDetailFragment extends Fragment{
         textView = (TextView) getActivity().findViewById(R.id.cardTextViewCity);
         textView.setText(venue.getCityStateZip());
         ImageView imageView = (ImageView) getActivity().findViewById(R.id.cardImageView);
-        if(null != venue.getImageUrl()  && !"".equals(venue.getImageUrl())) {
+        if (null != venue.getImageUrl() && !"".equals(venue.getImageUrl())) {
 
             Context context = getActivity().getBaseContext();
             Picasso.with(context)
@@ -63,11 +63,11 @@ public class VenueDetailFragment extends Fragment{
                     .placeholder(R.drawable.venue_placeholder_img)
                     .error(R.drawable.venue_error_img)
                     .into(imageView);
-        }else{
+        } else {
             imageView.setImageResource(R.drawable.venue_error_img);
         }
 
-        if(!venue.getSchedule().isEmpty()) {
+        if (!venue.getSchedule().isEmpty()) {
 
             StringBuilder sb = new StringBuilder();
 
@@ -132,7 +132,7 @@ public class VenueDetailFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_venue_detail, container, false);
 
         Button button = (Button) view.findViewById(R.id.cardShareButton);
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mShareListener.onShareButtonClicked(mVenue);
@@ -140,7 +140,7 @@ public class VenueDetailFragment extends Fragment{
         });
 
         button = (Button) view.findViewById(R.id.cardMapsButton);
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mMapListener.onMapButtonClicked(mVenue);
@@ -148,7 +148,7 @@ public class VenueDetailFragment extends Fragment{
         });
 
         button = (Button) view.findViewById(R.id.cardBuyTicketButton);
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mBuyListener.onBuyButtonClicked(mVenue);
