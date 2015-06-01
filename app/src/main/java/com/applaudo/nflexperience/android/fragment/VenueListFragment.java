@@ -49,7 +49,7 @@ public class VenueListFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError retrofitError) {
-                Log.v("myApp", retrofitError.getMessage());
+                Log.e("NFL Experience", retrofitError.getMessage());
             }
         };
 
