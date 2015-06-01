@@ -38,34 +38,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
 
-                    <TextView android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <TextView
                         android:id="@+id/cardTextViewName"
                         android:text="Venue Name"
-                        android:textStyle="bold"
-                        android:paddingTop="24dp"
-                        android:textSize="24sp"
-                        android:textColor="@color/nfl_blue_1"/>
+                        style="@style/PrimaryLargeTitle" />
 
-                    <TextView android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <TextView
                         android:id="@+id/cardTextViewAddress"
                         android:text="Venue Address"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="@color/nfl_black_2"/>
+                        style="@style/SubTitle"
+                       />
 
-                    <TextView android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <TextView
                         android:id="@+id/cardTextViewCity"
                         android:text="Venue City, Venue State Venue zip"
-                        android:textStyle="bold"
-                        android:paddingBottom="16dp"
-                        android:textSize="14sp"
-                        android:textColor="@color/nfl_black_2"/>
+                        style="@style/SubTitle"/>
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -76,8 +66,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/cardShareButton"
-                            android:text="Share"
-                            android:padding="8dp"
+                            android:text="@string/action_share"
+                            android:padding="@dimen/activity_margin_small"
                             android:layout_gravity="left"
                             android:textSize="12sp" />
 
@@ -85,8 +75,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/cardMapsButton"
-                            android:text="Take me there"
-                            android:padding="8dp"
+                            android:text="@string/action_map"
+                            android:padding="@dimen/activity_margin_small"
                             android:layout_gravity="center_horizontal"
                             android:textSize="12sp" />
 
@@ -94,8 +84,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/cardBuyTicketButton"
-                            android:text="Buy tickets"
-                            android:padding="8dp"
+                            android:text="@string/action_buy"
+                            android:padding="@dimen/activity_margin_small"
                             android:layout_gravity="right"
                             android:textSize="12sp" />
 
@@ -110,10 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/nfl_blue_1"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_margin="@dimen/activity_margin"
                 card_view:cardCornerRadius="2dp">
 
                 <LinearLayout
@@ -125,15 +112,10 @@
                     android:paddingRight="16dp"
                     android:paddingBottom="16dp">
 
-                    <TextView android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <TextView
                         android:id="@+id/cardTextViewName2"
                         android:text="Schedule"
-                        android:textStyle="bold"
-                        android:paddingTop="24dp"
-                        android:paddingBottom="16dp"
-                        android:textSize="24sp"
-                        android:textColor="@color/nfl_blue_3"
+                        style="@style/SecondayLargeTitle"
                         />
 
                     <TextView android:layout_width="wrap_content"
