@@ -60,6 +60,8 @@ public class VenueRecycleAdapter extends RecyclerView.Adapter<VenueViewHolder> {
                     .centerCrop()
                     .into(holder.imageView);
         } else {
+            //this is done to make sure to show a placeholder if the image does not have
+            //an image.
             holder.imageView.setImageResource(R.mipmap.ic_launcher);
         }
 

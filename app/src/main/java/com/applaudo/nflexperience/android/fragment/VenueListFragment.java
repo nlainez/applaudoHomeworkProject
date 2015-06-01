@@ -40,6 +40,7 @@ public class VenueListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //we use a callback to avoid network operations on main thread
         Callback<List<Venue>> callback = new Callback<List<Venue>>() {
             @Override
             public void success(List<Venue> o, Response response) {

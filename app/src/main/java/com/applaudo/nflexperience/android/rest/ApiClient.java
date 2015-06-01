@@ -18,6 +18,7 @@ public class ApiClient {
 
     public static PhunwareNflApi getInstance() {
         if (mPhunwareNflApi == null) {
+            //we set the date format to avoid parsing errors
             Gson gson = new GsonBuilder()
                     .setDateFormat(ScheduleItem.DATE_FORMAT)
                     .create();

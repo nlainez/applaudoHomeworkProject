@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity
         if (findViewById(R.id.fragment_container) != null) {
 
             if (savedInstanceState != null) {
+
                 //If theres more than one fragment in the backstack we must turn on the
                 //home button to provide ancestral navigation, only if we are returning
                 //from orientation change
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity
                     .add(R.id.fragment_container, venueListFragment).commit();
         } else {
 
+            //this is a workaround to hide the detail fragment on start
+            //Its not pretty an certainly can be improved
+            //actually, this produces a bug when you start the app and change orientation
             if (savedInstanceState == null) {
                 VenueDetailFragment detailFragment = (VenueDetailFragment)
                         getSupportFragmentManager().findFragmentById(R.id.venueDetail_fragment);
@@ -93,6 +97,8 @@ public class MainActivity extends AppCompatActivity
 
         if (articleFrag != null) {
 
+            //we are in 2 pane mode...
+
             if (articleFrag.isHidden()) {
                 getSupportFragmentManager().beginTransaction()
                         .show(articleFrag).commit();
@@ -127,6 +133,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onMapButtonClicked(Venue venue) {
+
+        //please see: https://developers.google.com/maps/documentation/android/intents for
+        //further reference. Im doing this to allow the user to use Maps to locate the venue
         Uri gmmIntentUri = Uri.parse("geo:" + venue.getLatitude() + "," + venue.getLongitude())
                 .buildUpon()
                 .appendQueryParameter("q", venue.getAddress() + ", " + venue.getCityStateZip())
@@ -141,6 +150,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBuyButtonClicked(Venue venue) {
         if (null != venue.getTicketLink() && !"".equals(venue.getTicketLink())) {
+            //if theres a ticket link, allow user to check the site in default browser
             Uri ticketLink = Uri.parse(venue.getTicketLink());
             Intent intent = new Intent(Intent.ACTION_VIEW, ticketLink);
             if (intent.resolveActivity(getPackageManager()) != null) {
