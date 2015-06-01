@@ -1,10 +1,28 @@
 # Interview homework project for Applaudo Studios
 
+#####
+
+This is an attempt to cover all the requirements specified in Android Technical Interview Homework Question document. A couple of small extra features have been added. 
+
+Code attempts to follow the provided Android Development guidelines.
+
 #### Instructions
+
+Clone this repository and import into Android Studio. Use Android Studio to compile. 
 
 #### Extra Features
 
+- Take me there button, to open the venue address in Google Maps
+- Buy tickets button, to open the ticket link in default browser
+- Basic Material design per Google Guidelines
+
 #### Improvements
+
+The following improvements should be added to the application:
+
+- Results paging in API results: This will allow efficient venue data retrieval.
+- Pull to refresh: This can help refresh the list if an error shows up.
+- Search: It would be awesome to be able to search venues.
 
 #### Helpful Resources
 
