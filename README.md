@@ -2,7 +2,7 @@
 
 #####
 
-This is an attempt to cover all the requirements specified in Android Technical Interview Homework Question document. A couple of small extra features have been added. 
+This is an attempt to cover all the requirements specified in Android Technical Interview Homework Question document. A couple of small extra features have been added. Application is named NFL Experience.
 
 Code attempts to follow the provided Android Development guidelines.
 
@@ -15,6 +15,7 @@ Clone this repository and import into Android Studio. Use Android Studio to comp
 - Take me there button, to open the venue address in Google Maps
 - Buy tickets button, to open the ticket link in default browser
 - Basic Material design per Google Guidelines
+- Uses official NFL color schema.
 
 #### Improvements
 
